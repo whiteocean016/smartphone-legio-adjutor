@@ -9,7 +9,7 @@ import pandas as pd
 from pathlib import Path
 
 ## Load latest dataframes
-import get_latest_data
+from utils import get_latest_data
 path_data = Path("./data")
 
 path_antutu = sorted(path_data.glob("*antutu*"))[-1]

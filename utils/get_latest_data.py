@@ -2,10 +2,10 @@
 import datetime
 import shutil
 
-import get_antutu
-import get_geekbench
-import get_gsmarena
-import get_passmark
+import utils.get_antutu
+import utils.get_geekbench
+import utils.get_gsmarena
+import utils.get_passmark
 
 ## move to data folder and rename with date
 time_now = datetime.datetime.now()
