@@ -46,12 +46,18 @@ def make_table(df, id_="datatable"):
         selected_rows=[],
         page_action="native",
         page_current= 0,
-        page_size= 1400,
+        page_size= 1500,
     )
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
+    html.Div(
+        dcc.Input(
+            id="input_filter_search",
+            placeholder="filter names",
+        )
+    ),
     html.Div(
         [make_table(df_passmark, id_="dt-passmark")],
         style={
@@ -90,6 +96,20 @@ style={
 })
 
 
+@app.callback(
+    [
+        Output("dt-passmark", "filter_query"),
+        Output("dt-antutu", "filter_query"),
+        Output("dt-geekbench", "filter_query"),
+        Output("dt-gsmarena", "filter_query")
+    ],
+    [Input("input_filter_search", "value")],
+)
+def update_filter(filter_str):
+    if filter_str is None or filter_str == "":
+        return [""] * 4
+    else:
+        return ["{name} contains '" + filter_str + "'"] * 4
 
 if __name__ == '__main__':
     app.run_server(
